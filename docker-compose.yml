@@ -1,0 +1,76 @@
+services:
+  app:
+    user: "1000:1000"
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    volumes:
+      - ./backend:/var/www/backend
+      - ./docker/supervisor/supervisord.conf:/etc/supervisor/supervisord.conf
+    depends_on:
+      - db
+      - redis
+    networks:
+      - notiserv
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8000:80"
+    volumes:
+      - ./backend:/var/www/backend
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    depends_on:
+      - app
+    networks:
+      - notiserv
+
+  db:
+    build:
+      context: .
+      dockerfile: docker/postgres/Dockerfile
+    volumes:
+      - notiserv_postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: notiserv
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    networks:
+      - notiserv
+
+  redis:
+    image: redis:alpine
+    networks:
+      - notiserv
+
+  testdb:
+    image: postgres:15.1-alpine
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: notiserv_test
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    networks:
+      - notiserv
+
+  rabbitmq:
+    image: rabbitmq:3.12-management-alpine
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - notiserv
+
+volumes:
+  notiserv_postgres_data:
+    driver: local
+
+networks:
+  notiserv:
+    driver: bridge

@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+
+echo "=== Starting Notification Service ==="
+
+sleep 30
+
+echo "Starting services..."
+exec /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf

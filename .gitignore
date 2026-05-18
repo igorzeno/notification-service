@@ -1,0 +1,55 @@
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Docker
+docker-compose-prod.yml
+
+# Laravel
+/vendor/
+/node_modules/
+.env
+.env.backup
+.env.production
+/storage/*.key
+/storage/framework/cache/
+/storage/framework/sessions/
+/storage/framework/testing/
+/storage/framework/views/
+/storage/logs/*.log
+/public/build/
+/public/hot
+/public/storage
+/bootstrap/cache/*.php
+/.phpunit.cache
+/.phpunit.result.cache
+/.env.testing
+
+# Composer
+composer.lock
+composer.phar
+
+# NPM
+package-lock.json
+yarn.lock
+
+# Logs
+*.log
+storage/logs/*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# PHPUnit
+.phpunit.result.cache
+.phpunit.cache/
+
+# Laravel Reverb
+reverb.php

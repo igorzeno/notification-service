@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "4a017bf1-0a2a-412e-8d7c-21e9f29a098d",
+		"name": "Notification Service API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31970178"
+	},
+	"item": [
+		{
+			"name": "Bulk Send",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"channel\": \"sms\",\r\n  \"message\": \"Hello world!\",\r\n  \"recipient_ids\": [1],\r\n  \"priority\": \"high\",\r\n  \"idempotency_key\": \"test_from_postman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/notifications/bulk",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"notifications",
+						"bulk"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subscriber History",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/subscribers/1/notifications",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"subscribers",
+						"1",
+						"notifications"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
