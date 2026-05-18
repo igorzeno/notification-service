@@ -51,5 +51,4 @@ Thumbs.db
 .phpunit.result.cache
 .phpunit.cache/
 
-# Laravel Reverb
-reverb.php
+.bashrc
