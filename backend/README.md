@@ -37,12 +37,13 @@ cd notification-service
 2. Создать .env файл
 
 ```bash
-cp .env.example .env
+cp backend/.env.example backend/.env
 
 3. Запустить контейнеры
 bash
 
 docker compose up -d --build
+docker compose exec app php artisan key:generate
 
 4. Выполнить миграции и сидеры
 bash
